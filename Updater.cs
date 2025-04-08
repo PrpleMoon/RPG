@@ -6,11 +6,16 @@ using System.IO.Compression;
 
 public class Updater : MonoBehaviour
 {
-    string localVersionPath = Application.persistentDataPath + "/version.txt";
-    string serverVersionUrl = "https://yourserver.com/version.txt";
+    string localVersionPath;
+    string serverVersionUrl = "https://raw.githubusercontent.com/PrpleMoon/RPG/refs/heads/main/version.txt";
+    void Awake()
+    {
+        CheckForUpdates();
+    }
 
     void CheckForUpdates()
     {
+        string localVersionPath = Application.persistentDataPath + "/version.txt";
         WebClient webClient = new WebClient();
         string serverVersion = webClient.DownloadString(serverVersionUrl).Trim();
         string localVersion = File.Exists(localVersionPath) ? File.ReadAllText(localVersionPath).Trim() : "0.0.0";
@@ -22,7 +27,7 @@ public class Updater : MonoBehaviour
 
         void StartUpdateProcess(string newVersion)
         {
-            string updateUrl = "https://yourserver.com/game_update.zip";
+            string updateUrl = "https://github.com/PrpleMoon/RPG/raw/refs/heads/main/game.zip";
             string tempZipPath = Application.persistentDataPath + "/game_update.zip";
 
             WebClient webClient = new WebClient();
@@ -42,8 +47,7 @@ public class Updater : MonoBehaviour
 
         void RelaunchGame()
         {
-            string executablePath = Application.dataPath + "/YourGame.exe";
-            Process.Start(executablePath);
+            Process.Start(Application.dataPath + "/RPG.exe");
             Application.Quit();
         }
 
