@@ -24,6 +24,10 @@ public class Updater : MonoBehaviour
         {
             StartUpdateProcess(serverVersion);
         }
+        else 
+        {
+            return;
+        }
 
         void StartUpdateProcess(string newVersion)
         {
