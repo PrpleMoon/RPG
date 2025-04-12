@@ -8,7 +8,7 @@ public class Updater : MonoBehaviour
 {
     string localVersionPath;
     string serverVersionUrl = "https://raw.githubusercontent.com/PrpleMoon/RPG/refs/heads/main/version.txt";
-    void Awake()
+    void Start()
     {
         CheckForUpdates();
     }
